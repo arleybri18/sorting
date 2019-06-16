@@ -6,7 +6,7 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *auxp, *auxn, *x;
+	listint_t *auxp = NULL, *auxn = NULL, *x = NULL;
 
 	auxp = *list;
 	x = (*list)->next;
@@ -18,9 +18,9 @@ void insertion_sort_list(listint_t **list)
 				auxp->next = auxn;
 				auxn->prev = auxp;
 				x->prev = auxp->prev;
-				auxp->prev = x;
 				x->next = auxp;
-				printf("auxp->n %d -  x->n %d - auxn->n %d\n", auxp->n, x->n, auxn->n);
+				auxp->prev = x;
+				/*printf("auxp->n %d -  x->n %d - auxn->n %d\n", auxp->n, x->n, auxn->n);*/
 				if (auxp->prev->prev == NULL)
 				{
 					*list = auxp->prev;
@@ -31,18 +31,19 @@ void insertion_sort_list(listint_t **list)
 				else
 				{
 					auxp = x->prev;
+					auxp->next = x;
 					auxn = x->next;
-					printf("else adentro\n");
+					/*printf("else adentro\n");*/
 				}
-				printf("auxp->n %d -  x->n %d - auxn->n %d\n", auxp->n, x->n, auxn->n);
+				/*printf("auxp->n %d -  x->n %d - auxn->n %d\n", auxp->n, x->n, auxn->n);*/
+				print_list(*list);
 			}
 			else
 			{
 				x = auxn;
 				auxn = auxn->next;
 				auxp = auxp->next;
-				printf("else afuera\n");
+				/*printf("else afuera\n");*/
 			}
-			print_list(*list);
 		}
 }
