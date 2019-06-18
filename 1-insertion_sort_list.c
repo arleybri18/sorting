@@ -74,6 +74,9 @@ void insertion_sort_list(listint_t **list)
 	listint_t *auxp = NULL, *auxn = NULL, *x = NULL, *last = NULL;
 	int sw = 1;
 
+	if ((*list)->next == NULL)
+		return;
+
 	auxp = *list;
 	x = (*list)->next;
 	last = *list;
