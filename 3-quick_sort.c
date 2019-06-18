@@ -18,7 +18,7 @@ void quick_sort(int *array, size_t size)
 	last = size - 1;
 
 	/* call the quick_sort function recursive*/
-	quick_sort_r(array, first, last);
+	quick_sort_r(array, first, last, size);
 
 }
 
@@ -28,22 +28,24 @@ void quick_sort(int *array, size_t size)
  * @array: array to sort
  * @first: first position to iterate
  * @last: last position to iterate
+ * @size: size of the array to sort
  *
  * Return: Nothing
  *
  **/
 
-void quick_sort_r(int *array, int first, int last)
+void quick_sort_r(int *array, int first, int last, size_t size)
 {
 	int pivot;
 
+
 	if (first < last)
 	{
-		pivot = partition(array, first, last);
-		/*sort the left part*/
-		quick_sort_r(array, first, pivot - 1);
+		pivot = partition(array, first, last, size);
 		/*sort the rigth part*/
-		quick_sort_r(array, pivot + 1, last);
+		quick_sort_r(array, pivot + 1, last, size);
+		/*sort the left part*/
+		quick_sort_r(array, first, pivot, size);
 	}
 }
 
@@ -53,11 +55,12 @@ void quick_sort_r(int *array, int first, int last)
  *@array: array to partition
  *@first: first position of the array to sort
  *@last: last position of the array to sort
+ *@size: size of the array to sort
  *
  *Return: position i new pivot for recursion
  */
 
-int partition(int *array, int first, int last)
+int partition(int *array, int first, int last, size_t size)
 {
 	int pivot, i, j, temp;
 	/* set the pivot last position*/
@@ -67,20 +70,23 @@ int partition(int *array, int first, int last)
 	/* iterate from the first position to last -1 position*/
 	for (j = first; j < last; j++)
 	{
-		if (array[j] <= pivot)
+		if (array[j] < pivot)
 		{
 			/*swap elements*/
 			i++;
 			temp = array[i];
 			array[i] = array[j];
 			array[j] = temp;
+			if (i != j)
+				print_array(array, size);
 		}
 	}
 	/*swap pivot*/
 	temp = array[i + 1];
-	array[i + 1] = array[last];
+	array[i + 1] = pivot;
 	array[last] = temp;
-	print_array(array, 10);
+	if (last != i + 1)
+		print_array(array, size);
 	/*return i the new pivot position*/
 	return (i);
 }
