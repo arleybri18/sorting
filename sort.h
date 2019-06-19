@@ -27,4 +27,6 @@ void print_list(const listint_t *list);
 int partition(int *array, int first, int last, size_t size);
 void quick_sort_r(int *array, int first, int last, size_t size);
 void shell_sort(int *array, size_t size);
+void quick_sort_hoare(int *array, size_t size);
+void quick_sort_hoare_r(int *array, int first, int last, size_t size);
 #endif /* SORT_H */
