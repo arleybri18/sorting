@@ -12,12 +12,14 @@ void shell_sort(int *array, size_t size)
 {
 	int gap, i, j, n, temp;
 
+	if (size < 2)
+		return;
 	n = size;
 	/*n + 1 = n *3 + 1, change n for gap and find gap*/
-	gap = (size / 3);
+	gap = size / 3;
 	/*start for with gap +1, decrement gap / 3*/
 	gap += 1;
-	for (; gap > 0; gap = gap / 3)
+	for (; gap > 0; gap = (gap - 1) / 3)
 	{
 		/* iterate from gap to right part of the array*/
 		for (i = gap; i < n; i++)
